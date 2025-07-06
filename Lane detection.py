@@ -45,14 +45,16 @@ def average_slope_intercept(image,lines):
 
 def region_of_interest(image):  # Identifies the region of interest by isolating the edge lines based on coordinates and using a mask
     height = image.shape[0]
-    polygons = np.array([[(200,height),(1100,height),(550,220)]])
+    polygons = np.array([[(10,height),(2800,height),(1000,1000)]])
     mask = np.zeros_like(image)
     cv2.fillPoly(mask,polygons,255)
     masked_image = cv2.bitwise_and(image,mask)
     return masked_image
 
-image = cv2.imread('test_image1.jpg') # Reads the image in the folder and returns it as multidimensional arrays containing intensities of each pixel. Try playing with by changing images.
+image = cv2.imread('test_image.jpg') # Reads the image in the folder and returns it as multidimensional arrays containing intensities of each pixel. Try playing with by changing images.
 lane_image = np.copy(image) #copies the image array into another variable for greyscaling
+
+
 canny_image = canny(lane_image)
 
 #cv2.imshow("Result",canny) #renders the image and shows it with a window name
@@ -71,7 +73,7 @@ cv2.waitKey(0)
 cv2.imshow("result",combo_image)
 cv2.waitKey(0)
 
-'''cap = cv2.VideoCapture("test2.mp4") # Object to capture the video
+cap = cv2.VideoCapture("test2.mp4") # Object to capture the video
 while(cap.isOpened()):
     _, frame = cap.read() # To decode every video frame
     canny_image = canny(frame)
@@ -85,4 +87,4 @@ while(cap.isOpened()):
         break
 
 cv2.release()
-cv2.destroyAllWindows()'''
+cv2.destroyAllWindows()
